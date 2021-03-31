@@ -8,12 +8,15 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  
   <!-- Main CSS-->
   <link rel="stylesheet" type="text/css" href="{{asset('dashboad_files/css/main.css')}}">
   <!-- Font-icon css-->
   <link rel="stylesheet" type="text/css"
   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="{{asset('dashboad_files/plugins/noty/noty.css')}}" rel="stylesheet">
+  @stack('styles')
   <script src="{{asset('dashboad_files/js/jquery-3.3.1.min.js')}}"></script>
   <script src="{{asset('dashboad_files/js/popper.min.js')}}"></script>
 
@@ -33,6 +36,15 @@
     <script src="{{asset('dashboad_files/js/bootstrap.min.js')}}"></script>
   <script src="{{asset('dashboad_files/plugins/select2/select2.js')}}"></script>
   <script src="{{asset('dashboad_files/js/main.js')}}"></script>
+  <script src="{{asset('dashboad_files/js/movie.js')}}"></script>
+<script>
+$.ajaxSetup({
+headers:{
+  'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+}
+
+});
+  </script>
   <script>
     $(document).ready(function(){
     $(document).on('click','.delete',function(e){

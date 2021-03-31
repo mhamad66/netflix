@@ -9,9 +9,29 @@
   </div>
   <ul class="app-menu">
     <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
-  <li><a class="app-menu__item " href="{{route('dashboard.categories.index')}}"><i class="app-menu__icon fa fa-list "></i><span class="app-menu__label">Categories</span></a></li>
-  <li><a class="app-menu__item " href="{{route('dashboard.roles.index')}}"><i class="app-menu__icon fa fa-anchor "></i><span class="app-menu__label">Roles</span></a></li>
-  <li><a class="app-menu__item " href="{{route('dashboard.users.index')}}"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">users</span></a></li>
+ @if (auth()->user()->hasPermission('categories_read'))
+ <li><a class="app-menu__item " href="{{route('dashboard.categories.index')}}"><i class="app-menu__icon fa fa-list "></i><span class="app-menu__label">Categories</span></a></li>
+ @endif
+ @if (auth()->user()->hasPermission('roles_read'))
+ <li><a class="app-menu__item " href="{{route('dashboard.movies.index')}}"><i class="app-menu__icon fa fa-play "></i><span class="app-menu__label">movies</span></a></li>
+ @endif
+ @if (auth()->user()->hasPermission('roles_read'))
+ 
+ <li><a class="app-menu__item " href="{{route('dashboard.roles.index')}}"><i class="app-menu__icon fa fa-anchor "></i><span class="app-menu__label">Roles</span></a></li>
+ @endif
+ @if (auth()->user()->hasPermission('users_read'))
+     
+ <li><a class="app-menu__item " href="{{route('dashboard.users.index')}}"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">users</span></a></li>
+ @endif
+
+ @if (auth()->user()->hasPermission('settings_read'))
+<li class="treeview "><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-gear"></i><span class="app-menu__label">Settings</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+  <ul class="treeview-menu">
+    <li><a class="treeview-item " href="{{route('dashboard.setting.social_login')}}"><i class="icon fa fa-circle-o"></i>social_login</a></li>
+    <li><a class="treeview-item" href="{{route('dashboard.setting.social_links')}}"><i class="icon fa fa-circle-o"></i> social_links</a></li>
+  </ul>
+</li>
+ @endif
     
     {{-- <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">UI Elements</span><i class="treeview-indicator fa fa-angle-right"></i></a>
       <ul class="treeview-menu">

@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:users_read')->only(['index']);
+        $this->middleware('permission:users_create')->only(['create','store']);
+        $this->middleware('permission:users_update')->only(['edit','update']);
+        $this->middleware('permission:users_delete')->only(['destroy']);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,11 +24,12 @@ class UserController extends Controller
      */
     public function index()
     {
+        // use with('roles') by solving n+1 problem
         $roles = Role::WhereRoleNot('super_admin')->get();
         $users = User::WhereSearch(request('search'))
             ->WhenRole(request('role_id'))
             ->with('roles')->whereRoleNot('super_admin')->paginate(5);
-            return view('dashboard.users.index', compact('users', 'roles'));
+        return view('dashboard.users.index', compact('users', 'roles'));
     }
 
     /**

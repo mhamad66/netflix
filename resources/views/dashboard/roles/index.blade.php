@@ -20,7 +20,11 @@
           </div>
           <div class="col-md-4">
             <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+          @if (auth()->user()->hasPermission('roles_create'))
           <a href="{{route('dashboard.roles.create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add</a>
+          @else
+          <a href="#" disabled class="btn btn-primary"><i class="fa fa-plus"></i> Add</a> 
+          @endif
           </div>
         </div>
         {{-- end row --}}
@@ -53,12 +57,27 @@
           @endforeach</td>
           <td>{{$role->users_count}}</td>
           <td>
-          <a href="{{route('dashboard.roles.edit',$role->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> Edit</a>
-          <form action="{{route('dashboard.roles.destroy',$role->id)}}" method="POST" style="display: inline">
-            @csrf
-            @method('delete')
-            <button type="submit" class="btn btn-danger btn-sm delete"><i class="fa fa-trash"></i> Delete</button>
-          </form>
+       @if (auth()->user()->hasPermission('roles_edit'))
+           
+       <a href="{{route('dashboard.roles.edit',$role->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> Edit</a>
+       @else
+       <a href="#"  disabled class="btn btn-info btn-sm"><i class="fa fa-edit"></i> Edit</a>
+           
+       @endif
+       
+            @if (auth()->user()->hasPermission('roles_delete'))
+            <form action="{{route('dashboard.roles.destroy',$role->id)}}" method="POST" style="display: inline">
+              @csrf
+              @method('delete')
+              <button type="submit" class="btn btn-danger btn-sm delete"><i class="fa fa-trash"></i> Delete</button>
+            </form>
+            @else
+            <form action="#" method="POST" style="display: inline">
+              @csrf
+              @method('delete')
+              <button type="submit" disabled class="btn btn-danger btn-sm delete"><i class="fa fa-trash"></i> Delete</button>
+            </form>
+            @endif
         </td>
       </tr>
       @endforeach

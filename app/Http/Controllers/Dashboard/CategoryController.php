@@ -9,6 +9,17 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:categories_read')->only(['index']);
+        $this->middleware('permission:categories_create')->only(['create','store']);
+        $this->middleware('permission:categories_update')->only(['edit','update']);
+        $this->middleware('permission:categories_delete')->only(['destroy']);
+
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +52,7 @@ class CategoryController extends Controller
         Category::create($request->all());
         session()->flash('success','data added successfuly ');
         return redirect(route('dashboard.categories.index'));
-    }
+        }
 
     /**
      * Display the specified resource.

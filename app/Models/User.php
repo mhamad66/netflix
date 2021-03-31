@@ -80,21 +80,21 @@ class User extends Authenticatable
     {
         return $qyery->whereHas('roles', function ($q)  use ($role_name) {
             return $q->whereIn('name', (array)$role_name)
-                ->orWhereIn('id', (array)$role_name);
+                ->WhereIn('id', (array)$role_name);
         });
     }
     public function scopeWhereRoleNot($qyery, $role_name)
     {
         return $qyery->whereHas('roles', function ($q)  use ($role_name) {
             return $q->whereNotIn('name', (array)$role_name)
-                ->orWhereNotIn('id', (array)$role_name);
+                ->WhereNotIn('id', (array)$role_name);
         });
     }
-    public function scopeWhenRole($query, $role_id)
+    public function scopeWhenRole($query,$role_id)
     {
-        return $query->when('role_id', function ($q) use ($role_id) {
+        return $query->when($role_id, function ($q) use ($role_id) {
 
-            return $this->scopeWhereRole($q, $role_id);
+            return $this->scopeWhereRole($q,$role_id);
         });
     }
 }//End Model ------------------------
