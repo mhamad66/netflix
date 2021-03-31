@@ -177,6 +177,7 @@ return [
         App\Providers\JetstreamServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         anlutro\LaravelSettings\ServiceProvider::class,
+        ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
 
     ],
 
@@ -230,7 +231,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        
+        'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class
+
     ],
 
 ];

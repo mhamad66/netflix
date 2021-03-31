@@ -40,7 +40,7 @@
         @csrf
         @method('POST')
         @include('partials._errors')
-        <label for="">upload</label>
+        <label for="" id="upload_state">upload</label>
         <div class="progress">
             <div class="progress-bar" id="movie_upload_progress"  role="progressbar"></div>
         </div>
@@ -84,7 +84,7 @@
 
             </div>
         </div>
-        <button type="submit" class="btn btn-primary mt-2"><i class="fa fa-plus"></i> Add</button>
+        <button type="submit" id="btn_submit_publish" style="display: none" class="btn btn-primary mt-2"><i class="fa fa-plus" ></i> publish</button>
 
 </div>
 </div>

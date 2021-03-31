@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Pbmedia\LaravelFFMpeg\FFMpegFacade as FFMpeg;
+use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 
 class StreamMovie implements ShouldQueue
 {
@@ -38,7 +38,7 @@ class StreamMovie implements ShouldQueue
         $midBitrate = (new X264('aac'))->setKiloBitrate(250);
         $highBitrate = (new X264('aac'))->setKiloBitrate(500);
 
-        FFMpeg::fromDisk('local')
+     FFMpeg::fromDisk('local')
             ->open($this->movie->path)
             ->exportForHLS()
             ->onProgress(function ($percent) {

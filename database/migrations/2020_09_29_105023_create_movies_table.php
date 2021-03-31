@@ -22,7 +22,7 @@ class CreateMoviesTable extends Migration
             $table->string('path')->nullable();
             $table->string('year')->nullable();
             $table->double('rating')->nullable();
-            $table->integer('percent')->nullable();
+            $table->integer('percent')->default(0);
             $table->timestamps();
         });
     }

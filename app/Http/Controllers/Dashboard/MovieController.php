@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\streamMovie;
+use App\Models\Category;
 use App\Models\movie;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,6 @@ class movieController extends Controller
      */
     public function index()
     {
-
         $movies = movie::paginate(5);
         return view('dashboard.movies.index', compact('movies'));
     }
@@ -36,8 +36,9 @@ class movieController extends Controller
      */
     public function create()
     {
+        $category = Category::all();
         $movie = movie::create([]);
-        return view('dashboard.movies.create', compact('movie'));
+        return view('dashboard.movies.create', compact(['movie','category']));
     }
 
 
@@ -65,9 +66,9 @@ class movieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Movie $movie)
     {
-        //
+    return $movie;
     }
 
     /**
