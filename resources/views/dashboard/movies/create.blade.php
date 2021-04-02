@@ -59,6 +59,15 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="">category</label>
+                <select name="categories[]" class="form-control select2"  multiple id="">
+                    @foreach ($categories as $category)
+                    
+                    <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                </select>
+                </div>
+                <div class="form-group">
                     <label>rating</label>
                     <input type="number" min="1" class="form-control" name="rating">
                 </div>
@@ -74,7 +83,7 @@
                 <div class="form-group">
                     <label>description</label>
                     <textarea type="text" class="form-control" name="description"
-                        style="height: 200px;  resize: none;"></textarea>
+                        style="height: 300px;  resize: none;"></textarea>
                 </div>
 
                 <div class="form-group">

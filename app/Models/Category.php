@@ -21,5 +21,13 @@ class Category extends Model
             return $q->where('name', 'like', "%$search%");
         });
     }
+
+
+public function movies(){
+    return $this->belongsToMany(Movie::class,'movie_category');
+
+}
+
+
 }
 //end model

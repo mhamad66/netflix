@@ -36,9 +36,9 @@ class movieController extends Controller
      */
     public function create()
     {
-        $category = Category::all();
+        $categories = Category::all();
         $movie = movie::create([]);
-        return view('dashboard.movies.create', compact(['movie','category']));
+        return view('dashboard.movies.create', compact(['movie','categories']));
     }
 
 
